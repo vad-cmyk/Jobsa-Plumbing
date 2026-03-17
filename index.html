@@ -865,31 +865,102 @@
       to   { opacity: 1; }
     }
 
-    /* ── MOBILE ── */
+    /* ── TABLET ── */
     @media (max-width: 1024px) {
       .services-grid { grid-template-columns: repeat(2, 1fr); }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .stat-item:nth-child(2) { border-right: none; }
-      .process-steps {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
+      .process-steps { grid-template-columns: 1fr; gap: 1rem; }
       .process-connector { display: none; }
     }
+
+    /* ── MOBILE ── */
     @media (max-width: 768px) {
-      nav { padding: 0 1.5rem; }
+      /* Nav */
+      nav { padding: 0 1.2rem; }
       .nav-links { display: none; }
-      .hero-content { width: 100%; padding: 0 1.5rem; padding-top: 72px; }
-      .hero-video-wrap { width: 100%; opacity: 0.35; }
-      .hero-video-wrap::before {
-        background: linear-gradient(to bottom, rgba(8,8,8,0.2) 0%, rgba(8,8,8,0.85) 70%);
+      .nav-cta { font-size: 0.72rem; padding: 0.5rem 1rem; }
+
+      /* Hero — stacked: video on top, text below */
+      .hero {
+        height: auto;
+        min-height: auto;
+        flex-direction: column;
+        align-items: stretch;
+        display: flex;
       }
+      .hero-glow { display: none; }
+      .scroll-indicator { display: none; }
+
+      /* Video — full width, natural aspect ratio, sits at top */
+      .hero-video-wrap {
+        position: relative;
+        width: 100%;
+        height: 62vw;
+        min-height: 260px;
+        max-height: 420px;
+        opacity: 1;
+        flex-shrink: 0;
+        /* push down below fixed nav */
+        margin-top: 72px;
+      }
+      .hero-video-wrap video {
+        object-position: center 20%;
+      }
+      /* Fade bottom of video into black — seamless into content below */
+      .hero-video-wrap::before {
+        background:
+          linear-gradient(to bottom, rgba(8,8,8,0.45) 0%, rgba(8,8,8,0) 18%, rgba(8,8,8,0) 55%, #080808 100%),
+          linear-gradient(to right, rgba(8,8,8,0.3) 0%, rgba(8,8,8,0) 30%);
+      }
+      .hero-video-wrap::after {
+        background: radial-gradient(ellipse at 50% 80%, rgba(232,124,62,0.07) 0%, transparent 60%);
+      }
+
+      /* Text content — below video, no overlap */
+      .hero-content {
+        position: relative;
+        width: 100%;
+        padding: 2rem 1.5rem 3.5rem;
+        padding-top: 1.8rem;
+        /* Stagger-in as page loads */
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeUp 0.7s ease 0.3s forwards;
+      }
+      .hero-eyebrow { margin-bottom: 1rem; }
+      .hero-heading { font-size: clamp(3rem, 12vw, 5rem); }
+      .hero-sub { font-size: 0.9rem; max-width: 100%; }
+      .hero-actions { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+      .btn-secondary { margin-top: 0.2rem; }
+      .hero-stats {
+        gap: 1.8rem;
+        margin-top: 2.5rem;
+        padding-top: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      /* Sections */
       .section-wrap { padding: 0 1.5rem; }
+      .services { padding: 5rem 0; }
+      .stats-strip { padding: 4rem 0; }
+      .process { padding: 5rem 0; }
+      .cta-section { padding: 5rem 0; }
+      .services-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
       .services-grid { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { padding: 1.8rem 1.5rem; }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-right: 1px solid var(--border); }
+      .stat-item:nth-child(4) { border-right: none; }
+      .stat-num { font-size: 3rem; }
+      .cta-title { font-size: clamp(2.4rem, 9vw, 4rem); }
+      .cta-actions { flex-direction: column; align-items: center; }
+      .cta-divider { display: none; }
       .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
-      .services-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .emergency-banner { flex-wrap: wrap; gap: 0.8rem; justify-content: center; padding: 1rem; }
+      .process-step { padding: 1.8rem 1.5rem; }
     }
   </style>
 </head>
